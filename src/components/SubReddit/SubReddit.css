@@ -1,0 +1,19 @@
+.SubReddit {
+    width: 160px;
+    height: 80px;
+    font-size: 13px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    margin: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.SubReddit:hover,
+.SubReddit:active {
+    background-color: #C0DDF5;
+}
+
+/* add style if it is selecteed too */

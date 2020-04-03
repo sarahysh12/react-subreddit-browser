@@ -1,0 +1,31 @@
+.Posts {
+    margin: 20px auto;
+    text-align: center;
+    display: flex;
+    flex-direction:row;
+}
+.PostDetails{
+    width: 40%;
+    position: absolute;
+    right: 0;
+    margin-top: 50px;
+}
+
+.Posts label {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.Posts input,
+.Posts textarea,
+.Posts select {
+    display: block;
+    width: 80%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    outline: none;
+    font: inherit;
+    margin: auto;
+}
