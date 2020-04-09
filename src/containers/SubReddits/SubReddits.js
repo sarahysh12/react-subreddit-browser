@@ -50,8 +50,11 @@ class SubReddits extends Component {
 
         return (
             <div>
-                <section className="SearchBox" >
+                <section className="SubredditsHeader" >
+                <header>
+                    <h1>SubReddits</h1>
                     <input type="text" placeholder="Search" onChange={this.onSearchHandler}/>
+                </header>
                 </section>
             <section className="SubReddits">
                 {subs}
