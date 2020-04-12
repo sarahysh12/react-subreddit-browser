@@ -3,32 +3,58 @@ import './Posts.css';
 import axios from 'axios';
 import Post from '../Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
+import queryString from 'query-string';
 
 
 class Posts extends Component{
 
     state = {
+        subreddit: '',
         loadedPosts : null,
         selectedPostId: null
     }
 
+    componentWillMount() {
+        console.log('will mount');
+        const url = queryString.parse(this.props.location.search);
+        this.setState({subreddit: url});
+        console.log(url);
+        if (url.id){
+            if(!this.state.loadedPosts || (this.state.loadedPosts && url.id !== ('/'+this.state.loadedPosts[0].data.subreddit_name_prefixed+'/'))){
+                axios.get('https://www.reddit.com'+url.id+'hot.json')
+                    .then(response => {
+                        const updatedPosts = response.data.data.children.map(post => {
+                            return {
+                                data: post.data
+                            }
+                        });
+                        this.setState({loadedPosts: updatedPosts})
+                        })
+                        .catch(error => {
+                             console.log(error);
+                        });
+            }
+    }  
+    }
+
     componentDidUpdate() {
-        if (this.props.url){
-                if(!this.state.loadedPosts || (this.state.loadedPosts && this.props.url !== ('/'+this.state.loadedPosts[0].data.subreddit_name_prefixed+'/'))){
-                    axios.get('https://www.reddit.com'+this.props.url+'hot.json')
-                        .then(response => {
-                            const updatedPosts = response.data.data.children.map(post => {
-                                return {
-                                    data: post.data
-                                }
-                            });
-                            this.setState({loadedPosts: updatedPosts})
-                            })
-                            .catch(error => {
-                                 console.log(error);
-                            });
-                }
-        }     
+        console.log('did update');
+        // if (this.state.subreddit){
+        //         if(!this.state.loadedPosts || (this.state.loadedPosts && this.state.subreddit !== ('/'+this.state.loadedPosts[0].data.subreddit_name_prefixed+'/'))){
+        //             axios.get('https://www.reddit.com'+this.state.subreddit+'hot.json')
+        //                 .then(response => {
+        //                     const updatedPosts = response.data.data.children.map(post => {
+        //                         return {
+        //                             data: post.data
+        //                         }
+        //                     });
+        //                     this.setState({loadedPosts: updatedPosts})
+        //                     })
+        //                     .catch(error => {
+        //                          console.log(error);
+        //                     });
+        //         }
+        // }     
     }
 
     postSelectedHandler = (id) => {
@@ -36,7 +62,7 @@ class Posts extends Component{
     }
 
     render() {
-        let posts = <p style={{color: 'gray', position: 'absolute', right: '40%'}}>Please select a SubReddit to view the posts!</p>
+        let posts = null;
         let selectedPost = null;
         if(this.state.loadedPosts){
             posts = this.state.loadedPosts.map(post =>{

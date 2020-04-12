@@ -21,6 +21,11 @@ class SubReddits extends Component {
 
     subRedditSelectedHandler = (url) => {
         this.setState({selectedSubRedditUrl: url});
+        const queryString = 'id='+url;
+        this.props.history.push({
+            pathname: '/posts',
+            search: '?' + queryString
+        })
     }
 
     //TODO fix the issue when you empty the seacrh bar
@@ -60,9 +65,6 @@ class SubReddits extends Component {
                 {subs}
             </section>
             <hr style={{borderTop: '1px solid lightgray', width: '80%'}}/>
-            <section>
-                <Posts url={this.state.selectedSubRedditUrl}/>
-            </section>
             </div>
         );
     }
