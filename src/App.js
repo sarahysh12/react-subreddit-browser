@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SubReddits from './containers/SubReddits/SubReddits';
 import { Route, Switch } from 'react-router-dom';
-import Posts from './components/Posts/Posts';
-import FullPost from './components/FullPost/FullPost';
+import Posts from './containers/Posts/Posts';
 
 class App extends Component {
   render() {

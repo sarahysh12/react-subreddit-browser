@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import './Posts.css';
 import axios from 'axios';
-import Post from '../Post/Post';
+import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
+import {NavLink} from 'react-router-dom';
 
 class Posts extends Component{
     state = {
         subreddit: '',
         loadedPosts : null,
-        selectedPostId: null
+        selectedPostId: null,
+        error: false
     }
 
     componentWillMount() {
@@ -55,10 +57,13 @@ class Posts extends Component{
                     data: post.data
                 }
             });
-            this.setState({loadedPosts: updatedPosts})
+            this.setState({loadedPosts: updatedPosts});
+            this.setState({subreddit: url});
+            this.setState({error: false});
             })
             .catch(error => {
-                 console.log(error);
+                this.setState({error: true});
+                console.log(error);
             });
     }
 
@@ -96,21 +101,33 @@ class Posts extends Component{
             author={selectedPostAuthor} image={selectedPostImage}/></div>
         }
 
+        if(this.state.error === true){
+            posts = <p style={{fontSize:'20px', color:'gray'}}>No Result Found</p>;
+        }
 
         return (
             <div>
                 <div className="PostsHeader">
-                    <h1><strong>{this.state.subreddit} </strong>{selectedPostTitle}</h1>
-                    <button onClick={() => this.onClickHotHandler('hot', this.state.subreddit.id)}>Hot</button>
-                    <button onClick={() => this.onClickNewHandler('new', this.state.subreddit.id)}>New</button>
-                    {/* TODO stopped working */}
-                    <form onSubmit={this.onSubmitSubReddit}>
-                        <label htmlFor="username">subreddit</label>
-                        <input
-                            type="text"
-                            name="subreddit"
-                            ref={(input) => this.input = input}/>
-                    </form>
+                    <div className="PostHeaderTitle">
+                        <h2><strong style={{color:'#CDA34F', fontSize: '26px'}}>{this.state.subreddit} </strong>{selectedPostTitle}</h2>
+                    </div>
+                    <div className="PostHeaderNavBar">
+                        <button>
+                            <NavLink 
+                            to="/" style={{textDecoration: 'none', color: '#E9E7DA'}}>SubReddits</NavLink>
+                        </button>
+                        <button onClick={() => this.onClickHotHandler('hot', this.state.subreddit.id)}>Hot</button>
+                        <button onClick={() => this.onClickNewHandler('new', this.state.subreddit.id)}>New</button>
+                        <form onSubmit={this.onSubmitSubReddit}>
+                            <label htmlFor="username"></label>
+                            <input
+                                type="text"
+                                name="subreddit"
+                                placeholder="Search for a subreddit"
+                                ref={(input) => this.input = input}/>
+                        </form>
+                    </div>
+                    
                 </div>
 
                 <div className="Posts">

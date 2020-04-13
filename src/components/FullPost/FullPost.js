@@ -2,12 +2,10 @@ import React from 'react';
 
 const fullpost = (props) => (
     <div>
-        <label>Title</label>
-        <input value={props.title || ''}  type="text"/>
-        <label>Content</label>
-        <textarea value={props.content || ''} rows="8"/>
-        <p>Author: {props.author}</p>
-        <img src={props.image} alt="postImage"/>
+        <label>{props.title || ''} </label>
+        <textarea style={{marginTop:'40px'}} value={props.content || ''} rows="10"/>
+        <p style={{marginTop:'20px', color: '#CDA34F'}} >Author: {props.author}</p>
+        <img style={{marginTop:'30px'}}  src={props.image} alt="postImage"/>
     </div>
 );
 

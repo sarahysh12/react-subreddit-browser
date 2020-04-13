@@ -1,0 +1,88 @@
+.Posts {
+    width: 70%;
+    margin: 50px auto;
+}
+
+.PostsHeader {
+    background-color: #636B46;
+    height: 150px;
+    padding-top: 10px;
+    color: #E9E7DA;
+}
+
+.PostHeaderTitle{
+    padding-top: 0px;
+    height: 90px;
+}
+
+.PostHeaderNavBar {
+    display: flex;
+    flex-flow: row wrap;
+    height: 40px;
+    width: 100%;
+    background-color: #778058;
+}
+
+.PostsHeader h2 {
+    font-size: 1.5em;
+  }
+
+.PostsHeader button {
+    background-color: #636B46;
+    color: #E9E7DA;
+    width: 150px;
+    height: 40px;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid #778058;
+}
+
+.PostsHeader button:active,
+.PostsHeader button:hover  {
+    color: #E9E7DA;
+    background-color: #CDA34F;
+    outline: none;
+}
+
+.PostsHeader input[type="text"] {
+    height: 30px;
+    margin-top: 2px;
+    width: 300px;
+    padding-left: 10px;
+    outline: none;
+    border-radius: 10px;
+    right:50px;
+    position: absolute;
+}
+
+
+
+.PostDetails{
+    margin-top: 50px; 
+}
+
+.Posts label {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+    color: #636B46;
+    font-size: 20px;
+}
+
+.Posts input,
+.Posts textarea,
+.Posts select {
+    display: block;
+    color: #636B46;
+    padding: 50px;
+    border-radius: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid white;
+    background-color: #E9E7DA;
+    outline: none;
+    font: inherit;
+    margin: auto;
+}

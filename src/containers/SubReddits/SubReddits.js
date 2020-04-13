@@ -40,7 +40,7 @@ class SubReddits extends Component {
   
     render() {
         let subs = null;
-        if (this.state.filteredSubs.length == 0) {
+        if (this.state.filteredSubs.length === 0) {
            subs = <p style={{fontSize:'20px', color:'gray'}}>No Result Found</p>
         } else{
 
