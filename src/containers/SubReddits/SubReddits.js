@@ -2,17 +2,19 @@ import React, { Component } from "react";
 import axios from 'axios';
 import SubReddit from '../../components/SubReddit/SubReddit';
 import './SubReddits.css';
-import Posts from '../../components/Posts/Posts';
+import Search from '../../components/Search/Search';
 
 class SubReddits extends Component {
     state = {
         subReddits : [],
+        filteredSubs: [],
         selectedSubRedditUrl: null
     }
     componentDidMount(){
         axios.get('https://www.reddit.com/subreddits/popular.json')
             .then(response => {
                 this.setState({subReddits: response.data.data.children})
+                this.setState({filteredSubs: response.data.data.children})
             })
             .catch(error => {
                 console.log(error);
@@ -21,18 +23,11 @@ class SubReddits extends Component {
 
     subRedditSelectedHandler = (url) => {
         this.setState({selectedSubRedditUrl: url});
-        const queryString = 'id='+url;
-        this.props.history.push({
-            pathname: '/posts',
-            search: '?' + queryString
-        })
+        this.props.history.push({pathname: url});
     }
 
-    //TODO fix the issue when you empty the seacrh bar
-    //TODO add no result found
-    //TODO what is autocomplete?
-    onSearchHandler = (evt) => {
-        const keyword = evt.target.value;
+    onSearchHandler = (keyword) => {
+        console.log()
         var regex = new RegExp(keyword);
         let searchResult = [];
         this.state.subReddits.some(sub => {
@@ -40,32 +35,27 @@ class SubReddits extends Component {
                 searchResult.push(sub)
             }
         });
-        if (searchResult.length > 0){
-            this.setState({subReddits: searchResult})
-        }
+        this.setState({filteredSubs: searchResult})
     }
 
+  
     render() {
-        const subs = this.state.subReddits.map(sub => {
+        const subs = this.state.filteredSubs.map(sub => {
             return <SubReddit title={sub.data.title}
                 key = {sub.data.id}
                 clicked={() => this.subRedditSelectedHandler(sub.data.url)}/>
         });
 
-
         return (
             <div>
-                <section className="SubredditsHeader" >
-                <header>
-                    <h1>SubReddits</h1>
-                    <input type="text" placeholder="Search" onChange={this.onSearchHandler}/>
-                </header>
+                <Search changed={this.onSearchHandler}/>
+                <section className="SubReddits">
+                    {subs}
                 </section>
-            <section className="SubReddits">
-                {subs}
-            </section>
-            <hr style={{borderTop: '1px solid lightgray', width: '80%'}}/>
+                <hr style={{borderTop: '1px solid lightgray', width: '80%'}}/>
+
             </div>
+
         );
     }
 
