@@ -27,7 +27,6 @@ class SubReddits extends Component {
     }
 
     onSearchHandler = (keyword) => {
-        console.log()
         var regex = new RegExp(keyword);
         let searchResult = [];
         this.state.subReddits.some(sub => {
@@ -40,19 +39,24 @@ class SubReddits extends Component {
 
   
     render() {
-        const subs = this.state.filteredSubs.map(sub => {
-            return <SubReddit title={sub.data.title}
-                key = {sub.data.id}
-                clicked={() => this.subRedditSelectedHandler(sub.data.url)}/>
-        });
+        let subs = null;
+        if (this.state.filteredSubs.length == 0) {
+           subs = <p style={{fontSize:'20px', color:'gray'}}>No Result Found</p>
+        } else{
 
+            subs = this.state.filteredSubs.map(sub => {
+                return <SubReddit title={sub.data.title}
+                    key = {sub.data.id}
+                    clicked={() => this.subRedditSelectedHandler(sub.data.url)}/>
+            });
+        }
+        
         return (
             <div>
                 <Search changed={this.onSearchHandler}/>
                 <section className="SubReddits">
                     {subs}
                 </section>
-                <hr style={{borderTop: '1px solid lightgray', width: '80%'}}/>
 
             </div>
 

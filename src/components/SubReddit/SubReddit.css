@@ -1,17 +1,21 @@
 .SubReddit {
-    width: 500px;
+    width: 700px;
     height: 80px;
     font-size: 13px;
     padding: 10px;
     text-align: center;
-    border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
-    margin: 5px;
+    margin: 10px;
     box-sizing: border-box;
     cursor: pointer;
+    background-color: #E9E7DA;
+    font-size: 15px;
+    color: #373F27;
+    border-radius: 10px;
 }
 
 .SubReddit:hover,
 .SubReddit:active {
-    background-color: #C0DDF5;
+    background-color: #CDA34F;
+    color: #E9E7DA;
 }

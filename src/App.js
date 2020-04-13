@@ -13,7 +13,6 @@ class App extends Component {
         <Switch>
               <Route path="/" exact component={SubReddits}/>
               <Route path="/r/:name" component={Posts}/> 
-              <Route path="/r/:name/posts/:pid" component={FullPost}/> 
         </Switch>
       </div>
     );

@@ -1,17 +1,21 @@
 .Post {
     height: 60px;
     font-size: 15px;
-    padding: 10px;
+    padding-top: 40px;
+    padding-left: 40px;
     text-align: left;
-    border-bottom: 1px solid #eee;
-    margin: 0px;
-    box-sizing: border-box;
+    border: 1px solid #CDA34F;
+    margin-top: 20px;
     cursor: pointer;
-    display: flex;
-    flex-direction:row;
+    border-radius: 40px;
+    color: #373F27;
+
 }
+
 
 .Post:hover,
 .Post:active {
-    background-color: lightgray;
+    background-color: #E9E7DA;
+    font-size: 20px;
+    padding-bottom: 15px;
 }

@@ -1,13 +1,28 @@
 
-.SubredditsHeader input{
-    padding-left: 10px;
-    width:400px;
-    height: 50px;
+.SubredditsHeader input[type=text]{
+  width: 30%;
+  height: 50px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 12px 20px 12px 40px;
+  transition: width 0.4s ease-in-out; 
+  outline: none;
+  color: #828081;
+  font-size: 20px;
+  text-transform: uppercase;
 }
 
+
+.SubredditsHeader input[type=text]:focus {
+  width: 60%;
+}
   
 .SubredditsHeader Header{
-    background-color: #222;
+    background-color: #636B46;
     height: 150px;
     padding: 20px;
     color: white;

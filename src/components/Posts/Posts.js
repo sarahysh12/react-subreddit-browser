@@ -23,17 +23,16 @@ class Posts extends Component{
 
     postSelectedHandler = (id) => {
         this.setState({selectedPostId: id});
-        this.props.history.push({pathname: this.state.subreddit+'/posts/'+id})
     }
 
     onClickHotHandler (){
         this.setState({selectedPostId: null});
-        this.getPosts('hot', this.state.subreddit.id);
+        this.getPosts('hot', this.state.subreddit);
     }
 
     onClickNewHandler (){
         this.setState({selectedPostId: null});
-        this.getPosts('new', this.state.subreddit.id);
+        this.getPosts('new', this.state.subreddit);
     }
 
     onSubmitHandler(event) {
@@ -92,12 +91,10 @@ class Posts extends Component{
                 }
             }
         }
-        console.log(this.props)
-        console.log(this.props.location.pathname)
-        // if(this.state.selectedPostId){
-        //     posts = <div className="PostDetails"> <FullPost title={selectedPostTitle} content={selectedPostContent}
-        //     author={selectedPostAuthor} image={selectedPostImage}/></div>
-        // }
+        if(this.state.selectedPostId){
+            posts = <div className="PostDetails"> <FullPost title={selectedPostTitle} content={selectedPostContent}
+            author={selectedPostAuthor} image={selectedPostImage}/></div>
+        }
 
 
         return (
